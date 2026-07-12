@@ -494,6 +494,14 @@
       : `${result.message}${result.key ? ` | body=${result.bodyValue} provider=${result.providerValue}` : ""}`;
   }
 
+  function normalizeTitle(title) {
+    return String(title || "")
+      .toLowerCase()
+      .replace(/[^\p{L}\p{N}]+/gu, " ")
+      .trim()
+      .replace(/\s+/g, " ");
+  }
+
   function extractTitlesAndIsbnsFromJson(obj, titleSet = new Set(), isbnSet = new Set()) {
     if (!obj || typeof obj !== "object") return;
     if (Array.isArray(obj)) {
