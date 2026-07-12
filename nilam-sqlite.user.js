@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         NILAM SQLite Assistant
 // @namespace    https://github.com/cscLearn/nilam-sqlite-assistant
-// @version      0.1.2
+// @version      0.1.3
 // @description  NILAM assistant with separate verified-real and AI-generated SQLite book pools.
 // @author       cscLearn
 // @match        https://ains.moe.gov.my/*
@@ -24,7 +24,7 @@
   const STORE_KEY = "nilam_sqlite_assistant_state_v1";
   const PANEL_X_KEY = "nilam_sqlite_panel_x";
   const PANEL_Y_KEY = "nilam_sqlite_panel_y";
-  const SCRIPT_VERSION = "0.1.2";
+  const SCRIPT_VERSION = "0.1.3";
   const API_BASE_URL = "https://nilam-book.cscflow.com";
   const API_TOKEN = "sk-nilambooks-fc62df67e2d7d8a9";
   const REFRESH_BOOK_COUNT = 30;
@@ -350,6 +350,18 @@
       if (state.apiTemplate) {
         state.apiTemplate.headers["authorization"] = authHeader;
         console.log("NILAM API Assistant: Automatically updated Bearer Token in background.");
+      } else {
+        // Auto-construct apiTemplate from known AINS API endpoint
+        state.apiTemplate = {
+          url: "https://ains-api.moe.gov.my/api/nilam-records",
+          headers: { "authorization": authHeader, "content-type": "application/json" },
+          bodyText: "",
+          payload: null,
+          capturedAt: new Date().toISOString()
+        };
+        console.log("NILAM API Assistant: Auto-constructed apiTemplate from Bearer token.");
+        if (panelReady) setStatus("API 凭证自动捕获成功。可以开始提交。");
+        setTimeout(() => { if (state.userId) fetchHistory(); }, 500);
       }
       saveState();
       renderApiStatus();
