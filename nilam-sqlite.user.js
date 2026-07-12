@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         NILAM SQLite Assistant
 // @namespace    https://github.com/cscLearn/nilam-sqlite-assistant
-// @version      0.1.1
+// @version      0.1.2
 // @description  NILAM assistant with separate verified-real and AI-generated SQLite book pools.
 // @author       cscLearn
 // @match        https://ains.moe.gov.my/*
@@ -24,7 +24,7 @@
   const STORE_KEY = "nilam_sqlite_assistant_state_v1";
   const PANEL_X_KEY = "nilam_sqlite_panel_x";
   const PANEL_Y_KEY = "nilam_sqlite_panel_y";
-  const SCRIPT_VERSION = "0.1.0";
+  const SCRIPT_VERSION = "0.1.2";
   const API_BASE_URL = "https://nilam-book.cscflow.com";
   const API_TOKEN = "sk-nilambooks-fc62df67e2d7d8a9";
   const REFRESH_BOOK_COUNT = 30;
