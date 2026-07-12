@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         NILAM SQLite Assistant
 // @namespace    https://github.com/cscLearn/nilam-sqlite-assistant
-// @version      0.1.0
+// @version      0.1.1
 // @description  NILAM assistant with separate verified-real and AI-generated SQLite book pools.
 // @author       cscLearn
 // @match        https://ains.moe.gov.my/*
@@ -1215,8 +1215,6 @@
     try {
       if (state.apiTemplate && state.userId && tokenStatus().ok) {
         await fetchHistory(false);
-      } else if (!(state.submittedTitles || []).length && !(state.submittedIsbns || []).length) {
-        throw new Error("sync history first so used books can be excluded");
       }
 
       const batch = await fetchNextBooks();
