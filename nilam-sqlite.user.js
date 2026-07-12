@@ -668,7 +668,7 @@
           console.log("NILAM API Assistant: Direct synced counter response ->", counterData);
           const count = extractTodayCountFromCounter(counterData);
           if (count !== null) {
-            state.todaySubmitCount = count;
+            state.todaySubmitCount = Math.max(state.todaySubmitCount || 0, count);
             saveState();
           }
         }
@@ -806,7 +806,7 @@
             console.log("NILAM API Assistant: Intercepted info/counter response ->", data);
             const count = extractTodayCountFromCounter(data);
             if (count !== null) {
-              state.todaySubmitCount = count;
+              state.todaySubmitCount = Math.max(state.todaySubmitCount || 0, count);
               saveState();
               renderApiStatus();
             }
@@ -883,7 +883,7 @@
               console.log("NILAM API Assistant: Intercepted XHR info/counter response ->", data);
               const count = extractTodayCountFromCounter(data);
               if (count !== null) {
-                state.todaySubmitCount = count;
+                state.todaySubmitCount = Math.max(state.todaySubmitCount || 0, count);
                 saveState();
                 renderApiStatus();
               }
